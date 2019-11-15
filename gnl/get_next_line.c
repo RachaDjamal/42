@@ -6,14 +6,13 @@
 /*   By: smallet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/05 10:29:19 by smallet      #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/05 16:10:16 by smallet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/15 14:03:58 by smallet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include	"get_next_line.h"
+#include "get_next_line.h"
 
 int		get_next_line(int fd, char **line)
 {
-	
 }

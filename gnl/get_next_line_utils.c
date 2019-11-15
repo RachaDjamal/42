@@ -11,16 +11,16 @@
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include	"get_next_line.h"
+#include "get_next_line.h"
 
-int     ft_strlen(char *str)
+int		ft_strlen(char *str)
 {
-    int     res;
+	int	res;
 
-    res = 0;
-    while (str[res])
-        res++;
-    return (res);
+	res = 0;
+	while (str[res])
+		res++;
+	return (res);
 }
 
 char	*ft_strdup(char *s1)
@@ -43,7 +43,7 @@ char	*ft_strdup(char *s1)
 
 char	*ft_memchr(char *s, int c)
 {
-	int	    i;
+	int		i;
 	char	*str;
 
 	i = 0;
@@ -65,11 +65,11 @@ char	*ft_strjoin_free(char *s1, char *s2)
 
 	if (!(s1) || !(s2))
 		return (ft_strdup("\0"));
-    j = 0;
-    while (s2[j] && s2[j] != '\n')
-        j++;
+	j = 0;
+	while (s2[j] && s2[j] != '\n')
+		j++;
 	if (!(str = (char *)malloc(sizeof(char) *
-					((ft_strlen(s1) + j) + 1))))
+					(ft_strlen(s1) + j + 1))))
 		return (NULL);
 	i = -1;
 	j = 0;
@@ -78,25 +78,6 @@ char	*ft_strjoin_free(char *s1, char *s2)
 	while (s2[j] && s2[j] != '\n')
 		str[i++] = s2[j++];
 	str[i] = '\0';
-    free(s1);
+	free(s1);
 	return (str);
-}
-
-int     main(void)
-{
-    char *str;
-    char *s2="Salut Batard";
-    int i=0;
-    char *res;
-
-    if (!(str = (char *)malloc(sizeof(char) * (9 + 1))))
-		return (0);
-    while(i < 10)
-    {
-        str[i] = i + '0';
-        i++;
-    }
-    str[i] = '\0';
-    res = ft_strjoin_free(str, s2);
-    printf("%s", res);
 }
