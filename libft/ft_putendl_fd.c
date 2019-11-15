@@ -6,7 +6,7 @@
 /*   By: smallet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/16 18:47:09 by smallet      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/16 18:55:43 by smallet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/01 15:23:54 by smallet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,6 +15,8 @@
 
 void	ft_putendl_fd(char *s, int fd)
 {
+	if (!(s))
+		return ;
 	ft_putstr_fd(s, fd);
 	write(fd, "\n", 1);
 }

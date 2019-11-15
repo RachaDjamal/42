@@ -6,7 +6,7 @@
 /*   By: smallet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/16 10:10:16 by smallet      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/16 17:56:32 by smallet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/01 16:14:21 by smallet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -71,25 +71,6 @@ int		ft_countlastsep(const char *s1, const char *set)
 	return (count);
 }
 
-char	*ft_mallocgoodsize(char const *s1, char const *set)
-{
-	int		firstsep;
-	int		lastsep;
-	int		len;
-	int		goodlen;
-	char	*res;
-
-	firstsep = ft_countfirstsep(s1, set);
-	lastsep = ft_countlastsep(s1, set);
-	len = ft_strlen(s1);
-	goodlen = len - firstsep - lastsep;
-	if (goodlen <= 0)
-		return ("\0");
-	if (!(res = (char *)malloc(sizeof(char) * (goodlen + 1))))
-		return (NULL);
-	return (res);
-}
-
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	char	*res;
@@ -97,13 +78,13 @@ char	*ft_strtrim(char const *s1, char const *set)
 	int		i;
 	int		goodlen;
 
+	if (!(s1) || !(set))
+		return (NULL);
 	first = ft_countfirstsep(s1, set);
-	goodlen = ft_strlen(s1) -
-		ft_countfirstsep(s1, set) - ft_countlastsep(s1, set);
+	goodlen = ft_strlen(s1) - first - ft_countlastsep(s1, set);
 	if (goodlen <= 0)
-		return ("\0");
-	res = ft_mallocgoodsize(s1, set);
-	if (!res)
+		return (ft_strdup("\0"));
+	if (!(res = (char *)malloc(sizeof(char) * (goodlen + 1))))
 		return (NULL);
 	i = 0;
 	while (i < goodlen)

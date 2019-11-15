@@ -15,22 +15,24 @@
 
 int		ft_len(int n)
 {
-	int len;
+	int		len;
+	long	nb;
 
 	len = 0;
-	if (n == 0)
+	nb = n;
+	if (nb == 0)
 	{
 		len = 1;
 		return (len);
 	}
-	if (n < 0)
+	if (nb < 0)
 	{
-		n = -n;
+		nb = -nb;
 		len++;
 	}
-	while (n > 0)
+	while (nb > 0)
 	{
-		n = n / 10;
+		nb = nb / 10;
 		len++;
 	}
 	return (len);

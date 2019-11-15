@@ -6,7 +6,7 @@
 /*   By: smallet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/21 16:44:39 by smallet      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/21 17:01:57 by smallet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/01 17:17:45 by smallet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,10 +18,15 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 	t_list	*temp;
 
 	temp = *lst;
-	while (temp)
+	if (*lst && del)
 	{
-		ft_lstdelone(temp, &(*del));
-		temp = temp->next;
+		while (temp)
+		{
+			(*del)(temp->content);
+			*lst = temp->next;
+			free(temp);
+			temp = *lst;
+		}
+		*lst = NULL;
 	}
-	*lst = NULL;
 }

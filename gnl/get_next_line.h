@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_memchr.c                                      .::    .:/ .      .::   */
+/*   get_next_line.h                                  .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: smallet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/10/11 14:51:17 by smallet      #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/01 12:08:11 by smallet     ###    #+. /#+    ###.fr     */
+/*   Created: 2019/11/15 11:11:14 by smallet      #+#   ##    ##    #+#       */
+/*   Updated: 2019/11/15 11:11:15 by smallet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
 
-void	*ft_memchr(const void *s, int c, size_t n)
-{
-	size_t			i;
-	unsigned char	*str;
+int     ft_strlen(char *str);
+char	*ft_strdup(char *s1);
+char	*ft_memchr(char *s, int c);
+char	*ft_strjoin_free(char *s1, char *s2);
+int		get_next_line(int fd, char **line);
 
-	i = 0;
-	str = (unsigned char *)s;
-	while (i < n)
-	{
-		if (str[i] == (unsigned char)c)
-			return (str + i);
-		i++;
-	}
-	return (NULL);
-}
+#endif

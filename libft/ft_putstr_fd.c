@@ -6,7 +6,7 @@
 /*   By: smallet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/16 18:26:52 by smallet      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/16 18:43:54 by smallet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/01 15:23:36 by smallet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,6 +18,8 @@ void	ft_putstr_fd(char *s, int fd)
 	int		i;
 
 	i = 0;
+	if (!(s))
+		return ;
 	while (s[i])
 	{
 		write(fd, &s[i], 1);

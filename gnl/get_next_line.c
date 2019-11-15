@@ -1,30 +1,19 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_memchr.c                                      .::    .:/ .      .::   */
+/*   get_next_line.c                                  .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: smallet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/10/11 14:51:17 by smallet      #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/01 12:08:11 by smallet     ###    #+. /#+    ###.fr     */
+/*   Created: 2019/11/05 10:29:19 by smallet      #+#   ##    ##    #+#       */
+/*   Updated: 2019/11/05 16:10:16 by smallet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include	"get_next_line.h"
 
-void	*ft_memchr(const void *s, int c, size_t n)
+int		get_next_line(int fd, char **line)
 {
-	size_t			i;
-	unsigned char	*str;
-
-	i = 0;
-	str = (unsigned char *)s;
-	while (i < n)
-	{
-		if (str[i] == (unsigned char)c)
-			return (str + i);
-		i++;
-	}
-	return (NULL);
+	
 }

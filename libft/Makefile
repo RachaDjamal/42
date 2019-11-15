@@ -21,8 +21,8 @@ AR = ar rcs
 all : ${NAME}
 
 
-.c.o :	${HDRS}
-		${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+%.o:%.c	${HDRS}
+		${CC} ${CFLAGS} -c $< -o $@
 
 $(NAME) :	${OBJS}
 			${AR} ${NAME} ${OBJS}
