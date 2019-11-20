@@ -31,7 +31,7 @@ int     ft_scan(char *line)
     return (-1);
 }
 
-char    **ft_init(int fd, int BUFFER_SIZE, char *buf, char **tampon)
+/*char    **ft_init(int fd, int BUFFER_SIZE, char *buf, char **tampon)
 {
     if ((fd < 0) || (BUFFER_SIZE <= 0) || (read(fd, &buf, 0) == -1))
         return (NULL);
@@ -39,15 +39,18 @@ char    **ft_init(int fd, int BUFFER_SIZE, char *buf, char **tampon)
         return (NULL);
     *tampon[0] = '\0';
     return (tampon);
-}
+}*/
 
-/*int		get_next_line(int fd, char **line)
+int		get_next_line(int fd, char **line)
 {
     static char *tampon;
     char        *temp;
     char        buf[BUFFER_SIZE + 1];
     int         res;
 
+    tampon = ft_strdup("\0");
+    *line = ft_strdup("\0");
+    buf[0] = '\0';
     if (ft_scan(tampon) == 1)
     {
         ft_strjoin_free(*line, tampon);
@@ -60,17 +63,29 @@ char    **ft_init(int fd, int BUFFER_SIZE, char *buf, char **tampon)
         ft_strjoin_free(*line, tampon);
     while (!(ft_scan(buf) == 1))
     {
-        res = read(fd, buf, BUFFER_SIZE);
+        res = read(fd, &buf, BUFFER_SIZE);
         buf[res] = '\0';
         ft_strjoin_free(*line, buf);
     }
-    return (0);
-}*/
-
-int main()
-{
-    static char *tampon;
-    char        buf[32];
-
-    tampon = ft_init(0, 1, buf, &tampon);
+    if (res != BUFFER_SIZE)
+    {
+        if (ft_scan(buf) == 1)
+        {
+            temp = tampon;
+            tampon = ft_strdup(ft_memchr(buf, '\n'));
+            free(temp);
+            return (1);
+        }
+        else
+        {
+            free(tampon);
+            tampon = NULL;
+            return (0);
+        }
+    }
+    temp = tampon;
+    tampon = ft_strdup(ft_memchr(buf, '\n'));
+    free(temp);
+    return (1);
 }
+

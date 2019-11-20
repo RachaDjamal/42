@@ -63,8 +63,6 @@ char	*ft_strjoin_free(char *s1, char *s2)
 	int		j;
 	char	*str;
 
-	if (!(s1) || !(s2))
-		return (ft_strdup("\0"));
 	j = 0;
 	while (s2[j] && s2[j] != '\n')
 		j++;
@@ -78,6 +76,6 @@ char	*ft_strjoin_free(char *s1, char *s2)
 	while (s2[j] && s2[j] != '\n')
 		str[i++] = s2[j++];
 	str[i] = '\0';
-	free(s1);
+	//free(s1);
 	return (str);
 }
