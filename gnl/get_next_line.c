@@ -18,17 +18,13 @@ int     ft_scan(char *line)
     int i;
 
     i = 0;
-    if (line[i] != '\0')
+    while (line[i])
     {
-        while (line[i])
-        {
-            if(line[i] == '\n')
-                return (1);
-            i++;
-        }
-        return (0);
+        if(line[i] == '\n')
+            return (1);
+        i++;
     }
-    return (-1);
+    return (0);
 }
 
 /*char    **ft_init(int fd, int BUFFER_SIZE, char *buf, char **tampon)
@@ -48,41 +44,44 @@ int		get_next_line(int fd, char **line)
     char        buf[BUFFER_SIZE + 1];
     int         res;
 
-    tampon = ft_strdup("\0");
-    *line = ft_strdup("\0");
+    if (!(tampon))
+        tampon = ft_strdup("");
+    *line = ft_strdup("");
     buf[0] = '\0';
     if (ft_scan(tampon) == 1)
     {
-        ft_strjoin_free(*line, tampon);
+        *line = ft_strjoin_free(*line, tampon);
         temp = tampon;
         tampon = ft_strdup(ft_memchr(tampon,'\n'));
         free(temp);
         return (1);
     }
     if (ft_scan(tampon) == 0)
-        ft_strjoin_free(*line, tampon);
+    {
+        *line = ft_strjoin_free(*line, tampon);
+    }
     while (!(ft_scan(buf) == 1))
     {
         res = read(fd, &buf, BUFFER_SIZE);
         buf[res] = '\0';
-        ft_strjoin_free(*line, buf);
-    }
-    if (res != BUFFER_SIZE)
-    {
-        if (ft_scan(buf) == 1)
+        *line = ft_strjoin_free(*line, buf);
+        if (res != BUFFER_SIZE)
         {
-            temp = tampon;
-            tampon = ft_strdup(ft_memchr(buf, '\n'));
-            free(temp);
-            return (1);
+            if (ft_scan(buf) == 1)
+           {
+                temp = tampon;
+                tampon = ft_strdup(ft_memchr(buf, '\n'));
+                free(temp);
+                return (1);
+            }
+            else
+            {
+                free(tampon);
+                tampon = NULL;
+                return (0);
+            }
         }
-        else
-        {
-            free(tampon);
-            tampon = NULL;
-            return (0);
-        }
-    }
+    }  
     temp = tampon;
     tampon = ft_strdup(ft_memchr(buf, '\n'));
     free(temp);
