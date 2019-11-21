@@ -24,6 +24,9 @@ int		ft_strlen(char *str);
 char	*ft_strdup(char *s1);
 char	*ft_memchr(char *s, int c);
 char	*ft_strjoin_free(char *s1, char *s2);
+int     ft_scan(char *line);
+char    *ft_init_check(int fd, char buf[BUFFER_SIZE + 1], char **tampon, char **line);
+int     ft_end_read(char **temp, char **tampon, char buf[BUFFER_SIZE + 1]);
 int		get_next_line(int fd, char **line);
 
 #endif

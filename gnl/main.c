@@ -27,6 +27,11 @@ int		main(int argc, char **argv)
 		fd = 0;
 	while ((ret = get_next_line(fd, &line)))
 	{
+		if (ret == -1)
+		{
+			printf("%d error", ret);
+			return (0);
+		}
 		printf("(%d) %d - ", i, ret);
 		printf("%s\n", line);
 		free(line);
