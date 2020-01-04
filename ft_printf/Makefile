@@ -1,4 +1,4 @@
-SRCS_NAME	=	ft_lltoa_base.c
+SRCS_NAME	=	ft_lltoa_base.c ft_parser.c
 
 SRCS_LIBFT	=	$(addprefix libft_printf/, ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c \
 				ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c \
@@ -17,7 +17,7 @@ SRC_PATH = ./
 
 SRCS = $(addprefix $(SRC_PATH), $(SRCS_NAME), $(SRCS_LIBFT))
 
-HEADER	=	./printf.h
+HEADER	=	./ft_printf.h
 
 OBJ_NAME	=	${SRCS_NAME:.c=.o} ${SRCS_LIBFT:.c=.o}
 
