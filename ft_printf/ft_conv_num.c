@@ -92,11 +92,31 @@ void		ft_conv_d(t_printf *pf, va_list ap)
 {
 	char	*res;
 	int		i;
+	int		len;
+	int		arg;
 
-	if (!(res = ft_itoa(va_arg(ap, int))))
+	arg = va_arg(ap, int);
+	if (!(res = ft_itoa(arg)))
 		return ;
 	i = 0;
-	while (res[i])
+	len = 0;
+	if (arg < 0)
+	{
 		pf->result += write(1, &res[i++], 1);
+		len--;
+	}
+	len += (int)ft_strlen(res);
+	if (pf->accuracy <= len)
+	{
+		while (res[i])
+			pf->result += write(1, &res[i++], 1);
+	}
+	else if (pf->accuracy > len)
+	{
+		while (len++ < pf->accuracy)
+			pf->result += write(1, "0", 1);
+		while (res[i])
+			pf->result += write(1, &res[i++], 1);
+	}
 	free(res);
 }
