@@ -25,6 +25,7 @@ typedef struct		s_printf
 	int		width;
 	int		accuracy;
 	int		result;
+	int		point;
 }					t_printf;
 t_printf			*setup_struct(void);
 int					ft_is_type(const char to_parse);

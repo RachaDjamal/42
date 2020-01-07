@@ -23,6 +23,7 @@ t_printf	*setup_struct(void)
 	setup->width = 0;
 	setup->accuracy = 1;
 	setup->result = 0;
+	setup->point = 0;
 	return (setup);
 }
 

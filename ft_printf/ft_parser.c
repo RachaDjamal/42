@@ -80,6 +80,7 @@ int		ft_parser(const char *to_parse, t_printf *pf, va_list ap)
 		if (to_parse[i] == '.')
 		{
 			i += ft_accu_manager(to_parse, pf, ap, i);
+			pf->point++;
 		}
 		else if (ft_is_type(to_parse[i]) == 1)
 		{

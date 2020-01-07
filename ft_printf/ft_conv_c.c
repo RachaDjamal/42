@@ -44,6 +44,7 @@ void		ft_conv_str(t_printf *pf, va_list ap)
 {
 	char	*str;
 	int		i;
+	int		accu;
 	char	*arg;
 
 	arg = va_arg(ap, char *);
@@ -55,11 +56,13 @@ void		ft_conv_str(t_printf *pf, va_list ap)
 	else if (!(str = ft_strdup(arg)))
 		return ;
 	i = 0;
-	while (str[i])
+	accu = pf->point == 0 ? (int)ft_strlen(arg) : pf->accuracy;
+	while (str[i] && i < accu)
 	{
 		pf->result += write(1, &str[i], 1);
 		i++;
 	}
+	free(str);
 }
 
 void		ft_conv_c(t_printf *pf, va_list ap)
