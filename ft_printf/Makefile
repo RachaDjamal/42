@@ -1,4 +1,4 @@
-SRCS_NAME	=	ft_parser.c ft_conv_num.c ft_conv_c.c ft_printf.c
+SRCS_NAME	=	ft_parser.c ft_parser_utils.c ft_conv_num.c ft_conv_c.c ft_printf.c
 
 SRCS_LIBFT	=	$(addprefix libft_printf/, ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c \
 				ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c \
@@ -10,7 +10,7 @@ SRCS_LIBFT	=	$(addprefix libft_printf/, ft_atoi.c ft_bzero.c ft_calloc.c ft_isal
 				ft_strdup.c ft_strjoin.c ft_strjoin_free.c ft_strlcat.c ft_strlcpy.c \
 				ft_strlen.c ft_strmapi.c ft_strncmp.c ft_strnstr.c \
 				ft_strrchr.c ft_strtrim.c ft_substr.c ft_tolower.c \
-				ft_toupper.c ft_lltoa_base.c)
+				ft_toupper.c ft_lltoa_base.c ft_isdigit_w0.c)
 				
 
 SRC_PATH = ./

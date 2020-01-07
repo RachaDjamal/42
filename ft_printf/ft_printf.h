@@ -33,6 +33,10 @@ t_printf			*ft_reset_struct(t_printf **pf);
 int					ft_is_type(const char to_parse);
 int					ft_accu_manager(const char *to_parse, t_printf *pf,
 va_list ap, int index);
+int					ft_flags_manager(const char *to_parse, t_printf *pf,
+va_list ap, int index);
+int					ft_width_manager(const char *to_parse, t_printf *pf,
+va_list ap, int index);
 void				ft_conv_manager(t_printf *pf, va_list ap, char type);
 void				ft_conv_d(t_printf *pf, va_list ap);
 void				ft_conv_u(t_printf *pf, va_list ap);

@@ -68,5 +68,6 @@ void				ft_lstadd_back(t_list **alst, t_list *new);
 int					ft_check_base(char *baseset);
 char				*ft_lltoa_base(long long n, char *baseset);
 char				*ft_strjoin_free(char s1, char *s2);
+int					ft_isdigit_w0(int c);
 
 #endif

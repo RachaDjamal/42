@@ -13,20 +13,6 @@
 
 #include "ft_printf.h"
 
-int		ft_is_type(const char to_parse)
-{
-	int		i;
-
-	i = 0;
-	while (PF_TYPES[i])
-	{
-		if (PF_TYPES[i] == to_parse)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
 void	ft_conv_manager(t_printf *pf, va_list ap, char type)
 {
 	if (type == 'd' || type == 'i')
@@ -53,21 +39,62 @@ va_list ap, int index)
 	char *accu;
 
 	ap = 0;
-	if (ft_is_type(to_parse[index + 1]) == 1)
+	pf->point++;
+	index++;
+	if (ft_is_type(to_parse[index]) == 1)
 	{
 		pf->accuracy = 0;
-		return (1);
+		return (index);
 	}
 	if (!(accu = (char *)ft_calloc(sizeof(char), 1)))
 		return (-1);
-	while (ft_is_type(to_parse[index + 1]) == 0)
+	while (ft_is_type(to_parse[index]) == 0)
 	{
-		accu = ft_strjoin_free(to_parse[index + 1], accu);
+		accu = ft_strjoin_free(to_parse[index], accu);
 		index++;
 	}
 	pf->accuracy = ft_atoi(accu);
 	free(accu);
-	return (index + 1);
+	return (index);
+}
+
+int		ft_flags_manager(const char *to_parse, t_printf *pf,
+va_list ap, int index)
+{
+	ap = 0;
+	while (to_parse[index] == '-' || to_parse[index] == '0')
+	{
+		if (to_parse[index] == '0')
+		{
+			pf->flagzero = 1;
+		}
+		else if (to_parse[index] == '-')
+		{
+			pf->flagminus = 1;
+		}
+		index++;
+	}
+	dprintf(1, "flagzero : %d\n", pf->flagzero);
+	dprintf(1, "flagminus : %d\n", pf->flagminus);
+	return (index);
+}
+
+int		ft_width_manager(const char *to_parse, t_printf *pf,
+va_list ap, int index)
+{
+	char	*res;
+
+	ap = 0;
+	if (!(res = (char *)ft_calloc(sizeof(char), 1)))
+		return (-1);
+	while (ft_isdigit(to_parse[index]) == 1)
+	{
+		res = ft_strjoin_free(to_parse[index], res);
+		index++;
+	}
+	pf->width = ft_atoi(res);
+	free(res);
+	return (index);
 }
 
 int		ft_parser(const char *to_parse, t_printf *pf, va_list ap)
@@ -78,23 +105,19 @@ int		ft_parser(const char *to_parse, t_printf *pf, va_list ap)
 	i = 0;
 	while (to_parse[i])
 	{
-		if (to_parse[i] == '-')
-			pf->flagminus = 1;
-		else if (to_parse[i] == '0')
-			pf->flagzero = 1;
-		else if (to_parse[i] == '.')
-		{
-			i += ft_accu_manager(to_parse, pf, ap, i);
-			pf->point++;
-		}
-		else if (ft_is_type(to_parse[i]) == 1)
+		if (to_parse[i] == '-' || to_parse[i] == '0')
+			i = ft_flags_manager(to_parse, pf, ap, i);
+		if ((ft_isdigit_w0(to_parse[i])) == 1)
+			i = ft_width_manager(to_parse, pf, ap, i);
+		if (to_parse[i] == '.')
+			i = ft_accu_manager(to_parse, pf, ap, i);
+		if (ft_is_type(to_parse[i]) == 1)
 		{
 			ft_conv_manager(pf, ap, (pf->type = to_parse[i]));
 			pfn = ft_reset_struct(&pf);
 			return (++i);
 		}
-		else
-			i++;
+		i++;
 	}
 	return (i);
 }
