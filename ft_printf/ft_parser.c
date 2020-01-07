@@ -65,17 +65,11 @@ va_list ap, int index)
 	while (to_parse[index] == '-' || to_parse[index] == '0')
 	{
 		if (to_parse[index] == '0')
-		{
 			pf->flagzero = 1;
-		}
 		else if (to_parse[index] == '-')
-		{
 			pf->flagminus = 1;
-		}
 		index++;
 	}
-	dprintf(1, "flagzero : %d\n", pf->flagzero);
-	dprintf(1, "flagminus : %d\n", pf->flagminus);
 	return (index);
 }
 
