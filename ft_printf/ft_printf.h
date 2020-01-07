@@ -17,20 +17,23 @@
 # include <stdarg.h>
 # include "libft_printf/libft.h"
 # define PF_TYPES "cspdiuxX%"
-# define PF_FLAGS "-.0*"
 
 typedef struct		s_printf
 {
 	char	type;
+	int		flagzero;
+	int		flagminus;
 	int		width;
 	int		accuracy;
-	int		result;
 	int		point;
+	int		result;
 }					t_printf;
-t_printf			*setup_struct(void);
+t_printf			*ft_setup_struct(void);
+t_printf			*ft_reset_struct(t_printf **pf);
 int					ft_is_type(const char to_parse);
 int					ft_accu_manager(const char *to_parse, t_printf *pf,
 va_list ap, int index);
+void				ft_conv_manager(t_printf *pf, va_list ap, char type);
 void				ft_conv_d(t_printf *pf, va_list ap);
 void				ft_conv_u(t_printf *pf, va_list ap);
 void				ft_conv_x(t_printf *pf, va_list ap);

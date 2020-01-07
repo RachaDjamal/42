@@ -13,17 +13,35 @@
 
 #include "ft_printf.h"
 
-t_printf	*setup_struct(void)
+t_printf	*ft_reset_struct(t_printf **pf)
+{
+	t_printf	*setup;
+
+	if (!(setup = malloc(sizeof(t_printf))))
+		return (NULL);
+	setup = *pf;
+	setup->type = '\0';
+	setup->flagzero = 0;
+	setup->flagminus = 0;
+	setup->width = 0;
+	setup->accuracy = 1;
+	setup->point = 0;
+	return (setup);
+}
+
+t_printf	*ft_setup_struct(void)
 {
 	t_printf	*setup;
 
 	if (!(setup = malloc(sizeof(t_printf))))
 		return (NULL);
 	setup->type = '\0';
+	setup->flagzero = 0;
+	setup->flagminus = 0;
 	setup->width = 0;
 	setup->accuracy = 1;
-	setup->result = 0;
 	setup->point = 0;
+	setup->result = 0;
 	return (setup);
 }
 
@@ -34,7 +52,7 @@ int			ft_printf(const char *format, ...)
 	int			i;
 	int			res;
 
-	if (!(pf = setup_struct()))
+	if (!(pf = ft_setup_struct()))
 		return (-1);
 	va_start(ap, format);
 	i = 0;
