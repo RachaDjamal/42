@@ -29,10 +29,8 @@ void		ft_conv_bx(t_printf *pf, va_list ap)
 		return ;
 	}
 	if (pf->accuracy <= len)
-	{
 		while (res[i])
 			pf->result += write(1, &res[i++], 1);
-	}
 	else if (pf->accuracy > len)
 	{
 		while (len++ < pf->accuracy)
@@ -59,10 +57,8 @@ void		ft_conv_x(t_printf *pf, va_list ap)
 		return ;
 	}
 	if (pf->accuracy <= len)
-	{
 		while (res[i])
 			pf->result += write(1, &res[i++], 1);
-	}
 	else if (pf->accuracy > len)
 	{
 		while (len++ < pf->accuracy)
@@ -89,10 +85,8 @@ void		ft_conv_u(t_printf *pf, va_list ap)
 		return ;
 	}
 	if (pf->accuracy <= len)
-	{
 		while (res[i])
 			pf->result += write(1, &res[i++], 1);
-	}
 	else if (pf->accuracy > len)
 	{
 		while (len++ < pf->accuracy)
