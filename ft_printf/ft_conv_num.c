@@ -23,6 +23,11 @@ void		ft_conv_bx(t_printf *pf, va_list ap)
 		return ;
 	i = 0;
 	len = (int)ft_strlen(res);
+	if (res[i] == '0' && pf->accuracy == 0)
+	{
+		free(res);
+		return ;
+	}
 	if (pf->accuracy <= len)
 	{
 		while (res[i])
@@ -48,6 +53,11 @@ void		ft_conv_x(t_printf *pf, va_list ap)
 		return ;
 	i = 0;
 	len = (int)ft_strlen(res);
+	if (res[i] == '0' && pf->accuracy == 0)
+	{
+		free(res);
+		return ;
+	}
 	if (pf->accuracy <= len)
 	{
 		while (res[i])
@@ -73,6 +83,11 @@ void		ft_conv_u(t_printf *pf, va_list ap)
 		return ;
 	i = 0;
 	len = (int)ft_strlen(res);
+	if (res[i] == '0' && pf->accuracy == 0)
+	{
+		free(res);
+		return ;
+	}
 	if (pf->accuracy <= len)
 	{
 		while (res[i])
@@ -100,6 +115,11 @@ void		ft_conv_d(t_printf *pf, va_list ap)
 		return ;
 	i = 0;
 	len = 0;
+	if (arg == 0 && pf->accuracy == 0)
+	{
+		free(res);
+		return ;
+	}
 	if (arg < 0)
 	{
 		pf->result += write(1, &res[i++], 1);

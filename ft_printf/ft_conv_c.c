@@ -15,10 +15,29 @@
 
 void		ft_conv_pcent(t_printf *pf, va_list ap)
 {
-	char c;
+	int		i;
+	char	flag;
 
-	c = (const char)va_arg(ap, int);
+	i = 0;
+	ap = 0;
+	if (pf->width > 1)
+	{
+		flag = pf->flagzero == 0 ? ' ' : '0';
+		if (pf->flagminus == 0)
+		{
+			while (i++ < (pf->width - 1))
+				pf->result += write(1, &flag, 1);
+		}
+	}
 	pf->result += write(1, "%", 1);
+	if (pf->width > 1)
+	{
+		if (pf->flagminus == 1)
+		{
+			while (i++ < pf->width - 1)
+				pf->result += write(1, " ", 1);
+		}
+	}
 }
 
 void		ft_conv_ptr(t_printf *pf, va_list ap)
@@ -53,10 +72,11 @@ void		ft_conv_str(t_printf *pf, va_list ap)
 		if (!(str = ft_strdup("(null)")))
 			return ;
 	}
-	else if (!(str = ft_strdup(arg)))
-		return ;
+	else 
+		if (!(str = ft_strdup(arg)))
+			return ;
 	i = 0;
-	accu = pf->point == 0 ? (int)ft_strlen(arg) : pf->accuracy;
+	accu = pf->point == 0 ? (int)ft_strlen(str) : pf->accuracy;
 	while (str[i] && i < accu)
 	{
 		pf->result += write(1, &str[i], 1);
