@@ -94,7 +94,6 @@ va_list ap, int index)
 int		ft_parser(const char *to_parse, t_printf *pf, va_list ap)
 {
 	int i;
-	t_printf	*pfn;
 
 	i = 0;
 	while (to_parse[i])
@@ -108,7 +107,7 @@ int		ft_parser(const char *to_parse, t_printf *pf, va_list ap)
 		if (ft_is_type(to_parse[i]) == 1)
 		{
 			ft_conv_manager(pf, ap, (pf->type = to_parse[i]));
-			pfn = ft_reset_struct(&pf);
+			pf = ft_reset_struct(pf);
 			return (++i);
 		}
 		i++;
