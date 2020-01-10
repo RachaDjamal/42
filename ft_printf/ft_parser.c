@@ -36,15 +36,20 @@ void	ft_conv_manager(t_printf *pf, va_list ap, char type)
 int		ft_accu_manager(const char *to_parse, t_printf *pf,
 va_list ap, int index)
 {
-	char *accu;
+	char	*accu;
+	int		arg;
 
-	ap = 0;
 	pf->point++;
-	index++;
-	if (ft_is_type(to_parse[index]) == 1)
+	if (ft_is_type(to_parse[++index]) == 1)
 	{
 		pf->accuracy = 0;
 		return (index);
+	}
+	if (to_parse[index] == '*')
+	{
+		arg = va_arg(ap, int);
+		pf->accuracy = arg;
+		return (++index);
 	}
 	if (!(accu = (char *)ft_calloc(sizeof(char), 1)))
 		return (-1);
@@ -77,8 +82,19 @@ int		ft_width_manager(const char *to_parse, t_printf *pf,
 va_list ap, int index)
 {
 	char	*res;
+	int		arg;
 
-	ap = 0;
+	if (to_parse[index] == '*')
+	{
+		arg = va_arg(ap, int);
+		if (arg < 0)
+		{
+			arg *= -1;
+			pf->flagminus = 1;
+		}
+		pf->width = arg;
+		return (++index);
+	}
 	if (!(res = (char *)ft_calloc(sizeof(char), 1)))
 		return (-1);
 	while (ft_isdigit(to_parse[index]) == 1)
@@ -100,7 +116,7 @@ int		ft_parser(const char *to_parse, t_printf *pf, va_list ap)
 	{
 		if (to_parse[i] == '-' || to_parse[i] == '0')
 			i = ft_flags_manager(to_parse, pf, ap, i);
-		if ((ft_isdigit_w0(to_parse[i])) == 1)
+		if ((ft_isdigit_w0(to_parse[i])) == 1 || to_parse[i] == '*')
 			i = ft_width_manager(to_parse, pf, ap, i);
 		if (to_parse[i] == '.')
 			i = ft_accu_manager(to_parse, pf, ap, i);
