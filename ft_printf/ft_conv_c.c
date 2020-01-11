@@ -80,9 +80,8 @@ void		ft_conv_str(t_printf *pf, va_list ap)
 		if (!(str = ft_strdup("(null)")))
 			return ;
 	}
-	else 
-		if (!(str = ft_strdup(arg)))
-			return ;
+	else if (!(str = ft_strdup(arg)))
+		return ;
 	accu = pf->point == 0 ? (int)ft_strlen(str) : pf->accuracy;
 	i = accu == 0 ? pf->width : pf->width - ft_strlen(str);
 	while (--i >= 0 && pf->flagminus == 0)
