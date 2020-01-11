@@ -38,6 +38,7 @@ va_list ap, int index);
 int					ft_width_manager(const char *to_parse, t_printf *pf,
 va_list ap, int index);
 void				ft_conv_manager(t_printf *pf, va_list ap, char type);
+void        		ft_write_conv_d(t_printf *pf, char *res, int i, int len);
 void				ft_conv_d(t_printf *pf, va_list ap);
 void				ft_conv_u(t_printf *pf, va_list ap);
 void				ft_conv_x(t_printf *pf, va_list ap);

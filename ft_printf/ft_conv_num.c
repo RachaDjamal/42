@@ -119,18 +119,6 @@ void		ft_conv_d(t_printf *pf, va_list ap)
 		pf->result += write(1, &res[i++], 1);
 		len--;
 	}
-	len += (int)ft_strlen(res);
-	if (pf->accuracy <= len)
-	{
-		while (res[i])
-			pf->result += write(1, &res[i++], 1);
-	}
-	else if (pf->accuracy > len)
-	{
-		while (len++ < pf->accuracy)
-			pf->result += write(1, "0", 1);
-		while (res[i])
-			pf->result += write(1, &res[i++], 1);
-	}
+	ft_write_conv_d(pf, res, i, len);
 	free(res);
 }
