@@ -17,27 +17,18 @@ void		ft_conv_bx(t_printf *pf, va_list ap)
 {
 	char	*res;
 	int		i;
-	int		len;
 
 	if (!(res = ft_lltoa_base(va_arg(ap, unsigned int), "0123456789ABCDEF")))
 		return ;
 	i = 0;
-	len = (int)ft_strlen(res);
 	if (res[i] == '0' && pf->accuracy == 0)
 	{
+		while (pf->width-- > 0)
+			pf->result += write(1, " ", 1);
 		free(res);
 		return ;
 	}
-	if (pf->accuracy <= len)
-		while (res[i])
-			pf->result += write(1, &res[i++], 1);
-	else if (pf->accuracy > len)
-	{
-		while (len++ < pf->accuracy)
-			pf->result += write(1, "0", 1);
-		while (res[i])
-			pf->result += write(1, &res[i++], 1);
-	}
+	ft_write_conv_x(pf, res, i);
 	free(res);
 }
 
@@ -45,27 +36,18 @@ void		ft_conv_x(t_printf *pf, va_list ap)
 {
 	char	*res;
 	int		i;
-	int		len;
 
 	if (!(res = ft_lltoa_base(va_arg(ap, unsigned int), "0123456789abcdef")))
 		return ;
 	i = 0;
-	len = (int)ft_strlen(res);
 	if (res[i] == '0' && pf->accuracy == 0)
 	{
+		while (pf->width-- > 0)
+			pf->result += write(1, " ", 1);
 		free(res);
 		return ;
 	}
-	if (pf->accuracy <= len)
-		while (res[i])
-			pf->result += write(1, &res[i++], 1);
-	else if (pf->accuracy > len)
-	{
-		while (len++ < pf->accuracy)
-			pf->result += write(1, "0", 1);
-		while (res[i])
-			pf->result += write(1, &res[i++], 1);
-	}
+	ft_write_conv_x(pf, res, i);
 	free(res);
 }
 
