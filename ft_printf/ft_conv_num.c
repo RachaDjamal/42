@@ -101,24 +101,17 @@ void		ft_conv_d(t_printf *pf, va_list ap)
 {
 	char	*res;
 	int		i;
-	int		len;
 	int		arg;
 
 	arg = va_arg(ap, int);
 	if (!(res = ft_itoa(arg)))
 		return ;
 	i = 0;
-	len = 0;
 	if (arg == 0 && pf->accuracy == 0)
 	{
 		free(res);
 		return ;
 	}
-	if (arg < 0)
-	{
-		pf->result += write(1, &res[i++], 1);
-		len--;
-	}
-	ft_write_conv_d(pf, res, i, len);
+	ft_write_conv_d(pf, res, i, arg);
 	free(res);
 }
