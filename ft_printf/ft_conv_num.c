@@ -109,6 +109,8 @@ void		ft_conv_d(t_printf *pf, va_list ap)
 	i = 0;
 	if (arg == 0 && pf->accuracy == 0)
 	{
+		while (pf->width-- > 0)
+			pf->result += write(1, " ", 1);
 		free(res);
 		return ;
 	}

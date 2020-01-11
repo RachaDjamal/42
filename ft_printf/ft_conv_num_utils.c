@@ -15,15 +15,15 @@
 
 void		ft_write_conv_d(t_printf *pf, char *res, int i, int arg)
 {
-	char	flag;
 	int		j;
 	int		len;
+	int		neg;
 
 	len = ft_strlen(res);
-	j = 0;
-	flag = ' ';
-	while (pf->flagminus == 0 && pf->width > len + 1 + ++j)
-		pf->result += write(1, &flag, 1);
+	neg = arg < 0 ? 1 : 0;
+	j = pf->accuracy > len - neg ? pf->accuracy + neg : len;
+	while (pf->flagminus == 0 && pf->width-- > j)
+		pf->result += write(1, " ", 1);
 	if (arg < 0)
 	{
 		pf->result += write(1, &res[i++], 1);
@@ -37,6 +37,6 @@ void		ft_write_conv_d(t_printf *pf, char *res, int i, int arg)
 			pf->result += write(1, "0", 1);
 	while (res[i])
 		pf->result += write(1, &res[i++], 1);
-	while (pf->flagminus == 1 && pf->width > len + j++)
-		pf->result += write(1, &flag, 1);
+	while (pf->flagminus == 1 && pf->width-- > j)
+		pf->result += write(1, " ", 1);
 }
