@@ -13,6 +13,27 @@
 
 #include "ft_printf.h"
 
+void		ft_write_conv_u(t_printf *pf, char *res, int i)
+{
+	int	len;
+	int	j;
+
+	len = (int)ft_strlen(res);
+	j = pf->accuracy > len ? pf->accuracy : len;
+	while (pf->flagminus == 0 && pf->width-- > j)
+		pf->result += write(1, " ", 1);
+	if (pf->accuracy <= len)
+		while (res[i])
+			pf->result += write(1, &res[i++], 1);
+	else if (pf->accuracy > len)
+		while (len++ < pf->accuracy)
+			pf->result += write(1, "0", 1);
+	while (res[i])
+		pf->result += write(1, &res[i++], 1);
+	while (pf->flagminus == 1 && pf->width-- > j)
+		pf->result += write(1, " ", 1);
+}
+
 void		ft_write_conv_d(t_printf *pf, char *res, int i, int arg)
 {
 	int		j;
