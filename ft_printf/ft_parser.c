@@ -48,16 +48,15 @@ va_list ap, int index)
 	if (to_parse[index] == '*')
 	{
 		arg = va_arg(ap, int);
+		if (arg < 0)
+			arg = 0;
 		pf->accuracy = arg;
 		return (++index);
 	}
 	if (!(accu = (char *)ft_calloc(sizeof(char), 1)))
 		return (-1);
 	while (ft_is_type(to_parse[index]) == 0)
-	{
-		accu = ft_strjoin_free(to_parse[index], accu);
-		index++;
-	}
+		accu = ft_strjoin_free(to_parse[index++], accu);
 	pf->accuracy = ft_atoi(accu);
 	free(accu);
 	return (index);

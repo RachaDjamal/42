@@ -70,10 +70,16 @@ void		ft_conv_ptr(t_printf *pf, va_list ap)
 void		ft_conv_str(t_printf *pf, va_list ap)
 {
 	char	*str;
-	int		i;
-	int		accu;
 	char	*arg;
+	int		i;
 
+	i = 0;
+	if (pf->point == 1 && pf->accuracy == 0)
+	{
+		while (pf->width-- > 0)
+			pf->result += write(1, " ", 1);
+		return ;
+	}
 	arg = va_arg(ap, char *);
 	if (!(arg))
 	{
@@ -82,17 +88,9 @@ void		ft_conv_str(t_printf *pf, va_list ap)
 	}
 	else if (!(str = ft_strdup(arg)))
 		return ;
-	accu = pf->point == 0 ? (int)ft_strlen(str) : pf->accuracy;
-	accu = accu < 0 ? -accu : accu;
-	i = accu == 0 ? pf->width : pf->width - ft_strlen(str);
-	while (--i >= 0 && pf->flagminus == 0)
-		pf->result += write(1, " ", 1);
-	i = 0;
-	while (str[i] && i < accu)
-		pf->result += write(1, &str[i++], 1);
-	i = accu == 0 ? pf->width : pf->width - ft_strlen(str);
-	while (--i >= 0 && pf->flagminus == 1)
-		pf->result += write(1, " ", 1);
+	if (!str[i] && pf->width == 0)
+		return ;
+	ft_write_conv_str(pf, str);
 	free(str);
 }
 

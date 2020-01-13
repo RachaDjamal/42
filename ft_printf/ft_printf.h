@@ -41,6 +41,7 @@ void				ft_conv_manager(t_printf *pf, va_list ap, char type);
 void				ft_write_conv_d(t_printf *pf, char *res, int i, int arg);
 void				ft_write_conv_u(t_printf *pf, char *res, int i);
 void				ft_write_conv_x(t_printf *pf, char *res, int i);
+void				ft_write_conv_str(t_printf *pf, char *str);
 void				ft_conv_d(t_printf *pf, va_list ap);
 void				ft_conv_u(t_printf *pf, va_list ap);
 void				ft_conv_x(t_printf *pf, va_list ap);
