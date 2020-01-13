@@ -28,6 +28,8 @@ void		ft_conv_bx(t_printf *pf, va_list ap)
 		free(res);
 		return ;
 	}
+	if (pf->flagzero == 1 && pf->point == 1)
+		pf->flagzero = 0;
 	ft_write_conv_x(pf, res, i);
 	free(res);
 }
@@ -47,6 +49,8 @@ void		ft_conv_x(t_printf *pf, va_list ap)
 		free(res);
 		return ;
 	}
+	if (pf->flagzero == 1 && pf->point == 1)
+		pf->flagzero = 0;
 	ft_write_conv_x(pf, res, i);
 	free(res);
 }
@@ -66,6 +70,8 @@ void		ft_conv_u(t_printf *pf, va_list ap)
 		free(res);
 		return ;
 	}
+	if (pf->flagzero == 1 && pf->point == 1)
+		pf->flagzero = 0;
 	ft_write_conv_u(pf, res, i);
 	free(res);
 }
@@ -87,6 +93,8 @@ void		ft_conv_d(t_printf *pf, va_list ap)
 		free(res);
 		return ;
 	}
+	if (pf->flagzero == 1 && pf->point == 1)
+		pf->flagzero = 0;
 	ft_write_conv_d(pf, res, i, arg);
 	free(res);
 }
