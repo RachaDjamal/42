@@ -13,6 +13,17 @@
 
 #include "ft_printf.h"
 
+int			ft_accu_null(t_printf *pf)
+{
+	if (pf->point == 1 && pf->accuracy == 0 && pf->flagwild == 0)
+	{
+		while (pf->width-- > 0)
+			pf->result += write(1, " ", 1);
+		return (1);
+	}
+	return (0);
+}
+
 void		ft_write_conv_str(t_printf *pf, char *str)
 {
 	int		i;

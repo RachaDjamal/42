@@ -32,6 +32,7 @@ typedef struct		s_printf
 t_printf			*ft_setup_struct(void);
 t_printf			*ft_reset_struct(t_printf *pf);
 int					ft_is_type(const char to_parse);
+int					ft_accu_null(t_printf *pf);
 int					ft_accu_manager(const char *to_parse, t_printf *pf,
 va_list ap, int index);
 int					ft_flags_manager(const char *to_parse, t_printf *pf,

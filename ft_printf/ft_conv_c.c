@@ -47,8 +47,8 @@ void		ft_conv_ptr(t_printf *pf, va_list ap)
 	int						i;
 	int						width;
 
-	ptr = (unsigned long int)va_arg(ap, void *);
-	if (!(res = ft_lltoa_base(ptr, "0123456789abcdef")))
+	ptr = (unsigned long long int)va_arg(ap, void *);
+	if (!(res = ft_ulltoa_base(ptr, "0123456789abcdef")))
 		return ;
 	i = 0;
 	width = pf->width - ft_strlen(res);
@@ -74,12 +74,8 @@ void		ft_conv_str(t_printf *pf, va_list ap)
 	int		i;
 
 	i = 0;
-	if (pf->point == 1 && pf->accuracy == 0 && pf->flagwild == 0)
-	{
-		while (pf->width-- > 0)
-			pf->result += write(1, " ", 1);
+	if (ft_accu_null(pf) == 1)
 		return ;
-	}
 	arg = va_arg(ap, char *);
 	if (!(arg))
 	{
@@ -89,7 +85,10 @@ void		ft_conv_str(t_printf *pf, va_list ap)
 	else if (!(str = ft_strdup(arg)))
 		return ;
 	if (!str[i] && pf->width == 0)
+	{
+		free(str);
 		return ;
+	}
 	if (pf->point == 1 && pf->accuracy == 1 && pf->flagwild == 1)
 		pf->accuracy = ft_strlen(str);
 	ft_write_conv_str(pf, str);
