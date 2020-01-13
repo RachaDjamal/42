@@ -23,6 +23,7 @@ typedef struct		s_printf
 	char	type;
 	int		flagzero;
 	int		flagminus;
+	int		flagwild;
 	int		width;
 	int		accuracy;
 	int		point;

@@ -18,6 +18,7 @@ t_printf	*ft_reset_struct(t_printf *pf)
 	pf->type = '\0';
 	pf->flagzero = 0;
 	pf->flagminus = 0;
+	pf->flagwild = 0;
 	pf->width = 0;
 	pf->accuracy = 1;
 	pf->point = 0;
@@ -33,6 +34,7 @@ t_printf	*ft_setup_struct(void)
 	setup->type = '\0';
 	setup->flagzero = 0;
 	setup->flagminus = 0;
+	setup->flagwild = 0;
 	setup->width = 0;
 	setup->accuracy = 1;
 	setup->point = 0;

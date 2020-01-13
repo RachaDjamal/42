@@ -48,8 +48,9 @@ va_list ap, int index)
 	if (to_parse[index] == '*')
 	{
 		arg = va_arg(ap, int);
+		pf->flagwild = 1;
 		if (arg < 0)
-			arg = 0;
+			arg = 1;
 		pf->accuracy = arg;
 		return (++index);
 	}

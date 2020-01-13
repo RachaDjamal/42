@@ -74,7 +74,7 @@ void		ft_conv_str(t_printf *pf, va_list ap)
 	int		i;
 
 	i = 0;
-	if (pf->point == 1 && pf->accuracy == 0)
+	if (pf->point == 1 && pf->accuracy == 0 && pf->flagwild == 0)
 	{
 		while (pf->width-- > 0)
 			pf->result += write(1, " ", 1);
@@ -90,6 +90,8 @@ void		ft_conv_str(t_printf *pf, va_list ap)
 		return ;
 	if (!str[i] && pf->width == 0)
 		return ;
+	if (pf->point == 1 && pf->accuracy == 1 && pf->flagwild == 1)
+		pf->accuracy = ft_strlen(str);
 	ft_write_conv_str(pf, str);
 	free(str);
 }
