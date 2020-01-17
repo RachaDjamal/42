@@ -29,15 +29,15 @@ CC		= cc
 
 RM		= rm -rf
 
-FLAG	= -Wall -Werror -Wextra -g3 #-fsanitize=address
+FLAG	= -Wall -Werror -Wextra
 
-all: $(OBJ_PATH) $(NAME)
+all: $(OBJ_PATH) $(NAME) Makefile ./libft_printf/libft.h
 
 $(NAME): $(OBJ) $(HEADER)
 	@ar rcs $(NAME) $(OBJ)
 	@echo "$'[32m\nCompiling effected successfully!"
 
-%.o: $(SRC_PATH)%.c $(HEADER)
+%.o: $(SRC_PATH)%.c $(HEADER) Makefile ./libft_printf/libft.h
 	@echo "$'[31mCompiling :$'[0m $<$'[0m"
 	@gcc $(FLAG) -I ./includes  -c $< -o $@
 

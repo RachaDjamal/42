@@ -24,8 +24,8 @@ all : ${NAME}
 %.o:%.c	${HDRS}
 		${CC} ${CFLAGS} -c $< -o $@
 
-$(NAME) :	${OBJS}
-			${AR} ${NAME} ${OBJS}
+$(NAME) :	${OBJS} 
+			${AR} ${NAME} ${OBJS} 
 
 bonus :		${OBJS} ${OBJSBONUS}
 			${AR} ${NAME} ${OBJS} ${OBJSBONUS}
