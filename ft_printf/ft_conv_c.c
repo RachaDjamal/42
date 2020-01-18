@@ -44,27 +44,22 @@ void		ft_conv_ptr(t_printf *pf, va_list ap)
 {
 	unsigned long int		ptr;
 	char					*res;
-	int						i;
 	int						width;
 
 	ptr = (unsigned long long int)va_arg(ap, void *);
-	if (!(res = ft_ulltoa_base(ptr, "0123456789abcdef")))
-		return ;
-	i = 0;
-	width = pf->width - ft_strlen(res);
-	while (--width > 1 && pf->flagminus == 0)
-		pf->result += write(1, " ", 1);
-	pf->result += write(1, "0x", 2);
-	if (pf->accuracy == 0 && ptr == 0)
+	if (!ptr && pf->point == 1 && pf->width != 0)
 	{
-		free(res);
+		width = pf->width;
+		while (--width > 1 && pf->flagminus == 0)
+			pf->result += write(1, " ", 1);
+		pf->result += write(1, "0x", 2);
+		while (--width >= 1 && pf->flagminus == 1)
+			pf->result += write(1, " ", 1);
 		return ;
 	}
-	while (res[i])
-		pf->result += write(1, &res[i++], 1);
-	while (--width >= 1 && pf->flagminus == 1)
-		pf->result += write(1, " ", 1);
-	free(res);
+	if (!(res = ft_ulltoa_base(ptr, "0123456789abcdef")))
+		return ;
+	ft_write_ptr(pf, res, ptr);
 }
 
 void		ft_conv_str(t_printf *pf, va_list ap)

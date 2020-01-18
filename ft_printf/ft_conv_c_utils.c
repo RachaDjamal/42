@@ -13,6 +13,28 @@
 
 #include "ft_printf.h"
 
+void		ft_write_ptr(t_printf *pf, char *res, unsigned long long int ptr)
+{
+	int	i;
+	int	width;
+
+	i = 0;
+	width = pf->width - ft_strlen(res);
+	while (--width > 1 && pf->flagminus == 0)
+		pf->result += write(1, " ", 1);
+	pf->result += write(1, "0x", 2);
+	if (pf->accuracy == 0 && ptr == 0)
+	{
+		free(res);
+		return ;
+	}
+	while (res[i])
+		pf->result += write(1, &res[i++], 1);
+	while (--width >= 1 && pf->flagminus == 1)
+		pf->result += write(1, " ", 1);
+	free(res);
+}
+
 int			ft_accu_null(t_printf *pf)
 {
 	if (pf->point == 1 && pf->accuracy == 0 && pf->flagwild == 0)
