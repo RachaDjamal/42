@@ -44,7 +44,8 @@ void				ft_write_conv_d(t_printf *pf, char *res, int i, int arg);
 void				ft_write_conv_u(t_printf *pf, char *res, int i);
 void				ft_write_conv_x(t_printf *pf, char *res, int i);
 void				ft_write_conv_str(t_printf *pf, char *str);
-void				ft_write_ptr(t_printf *pf, char *res, unsigned long long int ptr);
+void				ft_write_ptr(t_printf *pf, char *res,
+unsigned long long int ptr);
 void				ft_conv_d(t_printf *pf, va_list ap);
 void				ft_conv_u(t_printf *pf, va_list ap);
 void				ft_conv_x(t_printf *pf, va_list ap);
