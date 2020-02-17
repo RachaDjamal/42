@@ -12,13 +12,26 @@ RUN apt-get -y install php7.3-fpm
 RUN apt-get -y install php7.3-mysql
 RUN apt-get -y install mariadb-server
 RUN apt-get -y install wordpress
+RUN apt-get -y install vim
 RUN wget https://files.phpmyadmin.net/phpMyAdmin/4.9.0.1/phpMyAdmin-4.9.0.1-all-languages.tar.gz
 
 #copying all stuff in var/www/html
 RUN tar xvf phpMyAdmin-4.9.0.1-all-languages.tar.gz
 RUN rm -rf phpMyAdmin-4.9.0.1-all-languages.tar.gz
 RUN mv phpMyAdmin-4.9.0.1-all-languages/ /var/www/html/phpmyadmin
+RUN cp -r /var/www/html/phpmyadmin /usr/share
 RUN mv /usr/share/wordpress /var/www/html/
+
+RUN mkdir -p /var/lib/phpmyadmin/tmp
+RUN chown -R www-data:www-data /var/lib/phpmyadmin
+
+#Copying the launching script
+COPY srcs/default /etc/nginx/sites-available/
+COPY srcs/default /etc/nginx/sites-enabled/
+COPY srcs/config.inc.php var/www/html/phpmyadmin/
+COPY srcs/config.inc.php usr/share/phpmyadmin/
+
+RUN chown -R www-data:www-data var/www/html
 
 #Copying the launching script
 COPY srcs/launch_script.sh .
@@ -26,5 +39,6 @@ COPY srcs/launch_script.sh .
 #setup nginx daemon off
 RUN	echo "daemon off;" >> /etc/nginx/nginx.conf
 
+#EXPOSE 80
 #running up all services
 CMD sh launch_script.sh
