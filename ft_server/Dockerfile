@@ -25,11 +25,12 @@ RUN mv /usr/share/wordpress /var/www/html/
 RUN mkdir -p /var/lib/phpmyadmin/tmp
 RUN chown -R www-data:www-data /var/lib/phpmyadmin
 
-#Copying the launching script
+#Copying the phpmyadmin/nginx/wordpress config
 COPY srcs/default /etc/nginx/sites-available/
 COPY srcs/default /etc/nginx/sites-enabled/
 COPY srcs/config.inc.php var/www/html/phpmyadmin/
 COPY srcs/config.inc.php usr/share/phpmyadmin/
+COPY srcs/wp-config.php var/www/html/wordpress/
 
 RUN chown -R www-data:www-data var/www/html
 
