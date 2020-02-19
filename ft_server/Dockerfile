@@ -25,26 +25,32 @@ RUN mv /usr/share/wordpress /var/www/html/
 RUN mkdir -p /var/lib/phpmyadmin/tmp
 RUN chown -R www-data:www-data /var/lib/phpmyadmin
 
-#Copying the phpmyadmin/nginx/wordpress config
+#Copying the phpmyadmin/nginx/wordpress/index config
 COPY srcs/default /etc/nginx/sites-available/
 COPY srcs/default /etc/nginx/sites-enabled/
 COPY srcs/config.inc.php var/www/html/phpmyadmin/
 COPY srcs/config.inc.php usr/share/phpmyadmin/
 COPY srcs/wp-config.php var/www/html/wordpress/
 
-#RUN chown -R www-data:www-data var/www/html
+RUN chown -R www-data:www-data var/www/html
 
 #Copying the launching script
 COPY srcs/launch_script.sh .
 
+#Deleting useless stuff from /html
+RUN rm -rf /var/www/html/index.html
+COPY srcs/index.html /var/www/html/
+
 #setup nginx daemon off
 RUN	echo "daemon off;" >> /etc/nginx/nginx.conf
 
+#Setup mysql database
 RUN service mysql start && \
 		echo "CREATE DATABASE wordpress;" | mysql -u root && \
 		echo "CREATE USER 'user'@'localhost' IDENTIFIED BY 'password';"  | mysql -u root && \
         echo "GRANT ALL PRIVILEGES ON wordpress.* TO 'user'@'localhost';" | mysql -u root && \
+        #echo "GRANT ALL PRIVILEGES ON phpmyadmin.* TO 'user'@'localhost';" | mysql -u root && \
         echo "FLUSH PRIVILEGES;" | mysql -u root
-#EXPOSE 80
+
 #running up all services
 CMD sh launch_script.sh
