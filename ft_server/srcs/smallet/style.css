@@ -13,23 +13,16 @@ body {
 }
 
 .logo_42 {
-    max-width:7%;
+    max-width:15%;
     height:auto;
     margin-right:10px;
 }
 
 .logos {
-    width:200px;
-    height:auto;
-    display: block;
-    margin-top:50px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-#php {
-    width:300px;
-    height:auto;
+    width:auto;
+    height:150px;
+    margin : 20px;
+    vertical-align: middle;
 }
 
 p {
@@ -37,4 +30,29 @@ p {
     font-family: futura;
     color: white;
     text-align: center;
+}
+
+.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.9);
+    transition: 0.3s;
+    background-color: lightgrey;
+    height:280px;
+  }
+  
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.9);
+  }
+  
+.container {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+.button {
+    background-color: lightgrey;
+}
+
+.button:hover {
+    background-color: lightblue;
 }
