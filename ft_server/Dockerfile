@@ -40,6 +40,7 @@ COPY srcs/launch_script.sh .
 #Deleting useless stuff from /html
 RUN rm -rf /var/www/html/index.html
 COPY srcs/index.html /var/www/html/
+COPY srcs/smallet /var/www/html/smallet
 
 #setup nginx daemon off
 RUN	echo "daemon off;" >> /etc/nginx/nginx.conf
