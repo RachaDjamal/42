@@ -46,6 +46,10 @@ RUN	echo "daemon off;" >> /etc/nginx/nginx.conf
 
 #Setup mysql database
 RUN service mysql start && \
+        echo "CREATE DATABASE phpmyadmin;" | mysql -u root && \
+		echo "CREATE USER 'pma_user'@'localhost' IDENTIFIED BY 'pma_password';"  | mysql -u root && \
+        echo "GRANT ALL PRIVILEGES ON phpmyadmin.* TO 'pma_user'@'localhost';" | mysql -u root && \
+        echo "FLUSH PRIVILEGES;" | mysql -u root && \
 		echo "CREATE DATABASE wordpress;" | mysql -u root && \
 		echo "CREATE USER 'user'@'localhost' IDENTIFIED BY 'password';"  | mysql -u root && \
         echo "GRANT ALL PRIVILEGES ON wordpress.* TO 'user'@'localhost';" | mysql -u root && \
