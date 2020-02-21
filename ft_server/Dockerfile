@@ -9,15 +9,19 @@ RUN apt-get -y install curl
 RUN apt-get -y install nginx
 RUN apt-get -y install php7.3
 RUN apt-get -y install php7.3-fpm
-RUN apt-get -y install php7.3-mysql
-RUN apt-get -y install mariadb-server
+RUN apt-get -y install php-mysql
+RUN apt-get -y install php7.3-mbstring
+RUN apt-get -y install default-mysql-server
 RUN apt-get -y install wordpress
-RUN wget https://files.phpmyadmin.net/phpMyAdmin/4.9.0.1/phpMyAdmin-4.9.0.1-all-languages.tar.gz
+RUN wget https://files.phpmyadmin.net/phpMyAdmin/4.9.4/phpMyAdmin-4.9.4-all-languages.tar.gz
+
+#create default communication port
+EXPOSE 80
 
 #copying all stuff in var/www/html
-RUN tar xvf phpMyAdmin-4.9.0.1-all-languages.tar.gz
-RUN rm -rf phpMyAdmin-4.9.0.1-all-languages.tar.gz
-RUN mv phpMyAdmin-4.9.0.1-all-languages/ /var/www/html/phpmyadmin
+RUN tar xvf phpMyAdmin-4.9.4-all-languages.tar.gz
+RUN rm -rf phpMyAdmin-4.9.4-all-languages.tar.gz
+RUN mv phpMyAdmin-4.9.4-all-languages/ /var/www/html/phpmyadmin
 RUN cp -r /var/www/html/phpmyadmin /usr/share
 RUN mv /usr/share/wordpress /var/www/html/
 
@@ -36,10 +40,11 @@ COPY srcs/wp-config.php var/www/html/wordpress/
 COPY srcs/launch_script.sh .
 
 #Deleting useless stuff from /html and adding mine
-RUN rm -rf /var/www/html/index.html
+RUN rm -rf /var/www/html/index.nginx-debian.html
 COPY srcs/index.html /var/www/html/
 COPY srcs/smallet /var/www/html/smallet
 RUN chown -R www-data:www-data var/www/html
+RUN chown -R www-data:www-data usr/share
 
 #setup nginx daemon off
 RUN	echo "daemon off;" >> /etc/nginx/nginx.conf
