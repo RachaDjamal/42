@@ -49,6 +49,10 @@ RUN chown -R www-data:www-data usr/share
 #setup nginx daemon off
 RUN	echo "daemon off;" >> /etc/nginx/nginx.conf
 
+#Setup SSL connections
+COPY srcs/nginx-selfsigned.crt etc/ssl/certs/
+COPY srcs/nginx-selfsigned.key etc/ssl/private/
+
 #Setup mysql database
 RUN service mysql start && \
         echo "CREATE DATABASE phpmyadmin;" | mysql -u root && \
